@@ -75,8 +75,16 @@ cd ../..
 9) Build cefpython and run examples (66.1 is version number of cefpython):
 
 ```
-python ../tools/build.py 66.1 --no-automate
+python ../tools/build.py 66.1
 ```
+
+10) To build an whl (66.1 is version number of cefpython):
+
+```
+python ..\tools\build_distrib.py 66.1 --no-automate
+```
+
+Rebuild consumes much time. To avoid redundant rebuild, add `--no-rebuild`.
 
 ## Requirements
 
