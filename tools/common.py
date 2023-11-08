@@ -267,33 +267,6 @@ def get_python_path():
     return os.path.dirname(sys.executable)
 
 
-def get_python_include_path():
-    # 1) C:\Python27\include
-    # 2) ~/.pyenv/versions/2.7.13/bin/python
-    #    ~/.pyenv/versions/2.7.13/include/python2.7
-    # 3) ~/.pyenv/versions/3.4.6/include/python2.7m
-    # 4) /usr/include/python2.7
-    base_dir = os.path.dirname(sys.executable)
-    try_dirs = ["{base_dir}/include",
-                "{base_dir}/../include/python{ver}",
-                "{base_dir}/../include/python{ver}*",
-                ("{base_dir}/../Frameworks/Python.framework/Versions/{ver}"
-                 "/include/python{ver}*"),
-                "/usr/include/python{ver}"]
-    ver_tuple = sys.version_info[:2]
-    ver = "{major}.{minor}".format(major=ver_tuple[0], minor=ver_tuple[1])
-    for pattern in try_dirs:
-        pattern = pattern.format(base_dir=base_dir, ver=ver)
-        if WINDOWS:
-            pattern = pattern.replace("/", "\\")
-        results = glob.glob(pattern)
-        if len(results) == 1:
-            python_h = os.path.join(results[0], "Python.h")
-            if os.path.isfile(python_h):
-                return results[0]
-    return ".\\" if WINDOWS else "./"
-
-
 g_deleted_sample_apps = []
 
 
@@ -455,8 +428,8 @@ def get_cefpython_version():
 
 
 def get_version_from_file(header_file):
-    with open(header_file, "rU") as fp:
-        contents = fp.read()  # no need to decode() as "rU" specified
+    with open(header_file, "r") as fp:
+        contents = fp.read()
     ret = dict()
     matches = re.findall(r'^#define (\w+) "?([^\s"]+)"?', contents,
                          re.MULTILINE)
@@ -480,6 +453,10 @@ def get_msvs_for_python(vs_prefix=False):
     elif sys.version_info[:2] == (3, 8):
         return "VS2015" if vs_prefix else "2015"
     elif sys.version_info[:2] == (3, 9):
+        return "VS2015" if vs_prefix else "2015"
+    elif sys.version_info[:2] == (3, 10):
+        return "VS2015" if vs_prefix else "2015"
+    elif sys.version_info[:2] == (3, 11):
         return "VS2015" if vs_prefix else "2015"
     else:
         print("ERROR: This version of Python is not supported")

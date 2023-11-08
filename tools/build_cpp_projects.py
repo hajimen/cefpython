@@ -22,6 +22,7 @@ from distutils.ccompiler import new_compiler
 from common import *
 import shutil
 from pprint import pprint
+from distutils.sysconfig import get_python_inc as get_python_include_path
 
 # Macros
 MACROS = [
@@ -49,7 +50,6 @@ COMPILER_ARGS = [
     "/EHsc",
 ]
 subprocess_COMPILER_ARGS = [
-    "/MT",
 ]
 
 # Linker args
@@ -161,7 +161,7 @@ def build_cefpython_app_library():
 
 def build_subprocess_executable():
     print("[buil_cpp_projects.py] Build executable: subprocess")
-    compiler = get_compiler(static=True)
+    compiler = get_compiler()
     sources = get_sources(SUBPROCESS_DIR,
                           exclude_names=["print_handler_gtk.cpp"])
     (changed, objects) = smart_compile(compiler,
@@ -172,15 +172,18 @@ def build_subprocess_executable():
     executable_path = os.path.join(BUILD_SUBPROCESS,
                                    "subprocess" + EXECUTABLE_EXT)
     if changed or not os.path.exists(executable_path):
-        lib_dir = os.path.join(CEF_BINARIES_LIBRARIES, "lib")
+        lib_dir = os.path.join(CEF_BINARIES_LIBRARIES, "Release")
+        lib_dir_wrapper = os.path.join(CEF_BINARIES_LIBRARIES, r"build\libcef_dll_wrapper\Release")
         lib_dir_vs = os.path.join(lib_dir,
                                   get_msvs_for_python(vs_prefix=True))
         compiler.link_executable(objects,
                                  output_progname="subprocess",
                                  output_dir=BUILD_SUBPROCESS,
                                  libraries=["libcef",
-                                            "libcef_dll_wrapper_MT"],
-                                 library_dirs=[lib_dir, lib_dir_vs],
+                                            "libcef_dll_wrapper"],
+                                 library_dirs=[lib_dir,
+                                               lib_dir_wrapper,
+                                               lib_dir_vs],
                                  # TODO linker flags for Linux/Mac
                                  extra_preargs=None,
                                  extra_postargs=subprocess_LINKER_ARGS)

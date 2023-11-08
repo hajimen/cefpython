@@ -103,11 +103,12 @@ def main():
     setup(
         distclass=Distribution,
         cmdclass=cmdclass,
-        name="cefpython3",  # No spaces here, so that it works with deb pkg
+        name="cefpython3-v66.1-for-python-3.11-unofficial",  # No spaces here, so that it works with deb pkg
         version="{{VERSION}}",
         description="GUI toolkit for embedding a Chromium widget"
                     " in desktop applications",
-        long_description="CEF Python is an open source project founded"
+        long_description="A quick hack to run CEF Python on Python 3.11 Windows x86-64.\n"
+                         "CEF Python is an open source project founded"
                          " by Czarek Tomczak in 2012 to provide python"
                          " bindings for the Chromium Embedded Framework."
                          " Examples of embedding CEF browser are available"
@@ -126,30 +127,24 @@ def main():
                          " for web scraping or as a web crawler, or other"
                          " kind of internet bots.\n\n"
                          "Project website:\n"
+                         "https://github.com/hajimen/cefpython\n"
                          "https://github.com/cztomczak/cefpython",
         license="BSD 3-clause",
-        author="Czarek Tomczak",
-        author_email="czarek.tomczak@gmail.com",
-        url="https://github.com/cztomczak/cefpython",
-        download_url="https://github.com/cztomczak/cefpython/releases",
+        author=["Czarek Tomczak", "NAKAZATO Hajime"],
+        author_email=["czarek.tomczak@gmail.com", "hajime@kaoriha.org"],
+        url="https://github.com/hajimen/cefpython",
+        download_url="https://github.com/hajimen/cefpython",
         platforms=["{{SYSCONFIG_PLATFORM}}"],
         packages=["cefpython3"],  # Disabled: "cefpython3.wx"
         package_data=get_package_data(),
         classifiers=[
-            "Development Status :: 6 - Mature",
+            "Development Status :: 3 - Alpha",
             "Intended Audience :: Developers",
             "License :: OSI Approved :: BSD License",
             "Natural Language :: English",
-            "Operating System :: MacOS :: MacOS X",
             "Operating System :: Microsoft :: Windows",
-            "Operating System :: POSIX :: Linux",
-            "Programming Language :: Python :: 2.7",
-            "Programming Language :: Python :: 3.4",
-            "Programming Language :: Python :: 3.5",
-            "Programming Language :: Python :: 3.6",
-            "Programming Language :: Python :: 3.7",
-            "Programming Language :: Python :: 3.8",
-            "Programming Language :: Python :: 3.9",
+            "Programming Language :: Python :: 3.10",
+            "Programming Language :: Python :: 3.11",
             "Topic :: Desktop Environment",
             "Topic :: Internet",
             "Topic :: Internet :: WWW/HTTP",

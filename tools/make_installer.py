@@ -78,11 +78,15 @@ def main():
     copy_operations = [
         (ROOT_DIR, "License"), (PKG_DIR,),
         (CEF_BINARIES_LIBRARIES, "*.txt"), (PKG_DIR,),
-        (CEF_BINARIES_LIBRARIES, "bin/*"), (PKG_DIR,),
+        (CEF_BINARIES_LIBRARIES, "Release/*" if WINDOWS else "bin/*"), (PKG_DIR,),
         (CEFPYTHON_BINARY, "*"), (PKG_DIR,),
         (EXAMPLES_DIR, "*"), (PKG_DIR, "examples/"),
         (EXAMPLES_DIR, "*"), (SETUP_DIR, "examples/"),
     ]
+    if WINDOWS:
+        copy_operations.extend([
+            (CEF_BINARIES_LIBRARIES, "Resources/*"), (PKG_DIR,),
+        ])
     perform_copy_operations(copy_operations)
     delete_cef_sample_apps(caller_script=__file__, bin_dir=PKG_DIR)
 
@@ -365,12 +369,14 @@ def copy_cpp_extension_dependencies_issue359(pkg_dir):
     # in the package. Thus if included, msvcpxx.dll dependency is
     # required as well.
 
-    # Python 3.5 / 3.6 / 3.7 / 3.8 / 3.9
+    # Python 3.5 / 3.6 / 3.7 / 3.8 / 3.9 / 3.10 / 3.11
     if os.path.exists(os.path.join(pkg_dir, "cefpython_py35.pyd")) \
             or os.path.exists(os.path.join(pkg_dir, "cefpython_py36.pyd")) \
             or os.path.exists(os.path.join(pkg_dir, "cefpython_py37.pyd")) \
             or os.path.exists(os.path.join(pkg_dir, "cefpython_py38.pyd")) \
-            or os.path.exists(os.path.join(pkg_dir, "cefpython_py39.pyd")):
+            or os.path.exists(os.path.join(pkg_dir, "cefpython_py39.pyd")) \
+            or os.path.exists(os.path.join(pkg_dir, "cefpython_py310.pyd")) \
+            or os.path.exists(os.path.join(pkg_dir, "cefpython_py311.pyd")):
         search_paths = [
             # This is where Microsoft Visual C++ 2015 Update 3 installs
             # (14.00.24212).

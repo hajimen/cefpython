@@ -133,6 +133,11 @@ def main():
     options["library_dirs"] = get_library_dirs()
     options["libraries"] = get_libraries()
 
+    unoverwritable_obstacle = os.path.join(
+        BUILD_CEFPYTHON, f'cefpython_py{PYVERSION}.h')
+    if os.path.exists(unoverwritable_obstacle):
+        os.remove(unoverwritable_obstacle)
+
     print("[cython_setup.py] Execute setup()")
     setup(
         name="cefpython_py{pyver}".format(pyver=PYVERSION),
@@ -145,7 +150,10 @@ def get_winsdk_lib():
     print("[cython_setup.py] Detect Windows SDK library directory")
     ret = ""
     if WINDOWS:
-        if ARCH32:
+        if 'WindowsSdkDir' in os.environ:
+            winsdk_libs = os.environ['WindowsSdkDir'] + 'Lib\\' \
+                + os.environ['WindowsSDKLibVersion']
+        elif ARCH32:
             winsdk_libs = [
                 # Windows 7 SDKs.
                 r"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib",
@@ -365,12 +373,14 @@ def get_library_dirs():
                      get_msvs_for_python(vs_prefix=True)),
     ]
     if WINDOWS:
-        library_dirs.extend([
+        library_dirs = [
+            os.path.join(CEF_BINARIES_LIBRARIES, "Release"),
+            os.path.join(CEF_BINARIES_LIBRARIES, r"build\libcef_dll_wrapper\Release"),
             get_winsdk_lib(),
             BUILD_CEFPYTHON_APP,
             BUILD_CLIENT_HANDLER,
             BUILD_CPP_UTILS,
-        ])
+        ]
     if MAC:
         library_dirs.append(os.path.join(CEF_BINARIES_LIBRARIES, "bin"))
     if MAC or LINUX:
@@ -388,7 +398,7 @@ def get_libraries():
     if WINDOWS:
         libraries.extend([
             "libcef",
-            "libcef_dll_wrapper_MD",
+            "libcef_dll_wrapper",
             "User32",
             "cefpython_app",
             "cpp_utils",

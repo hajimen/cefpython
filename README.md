@@ -1,3 +1,7 @@
+# Fork note
+
+This is a quick hack to run cefpython3 on Python 3.11 (and 3.10) Windows x86-64.
+
 # CEF Python
 
 Table of contents:

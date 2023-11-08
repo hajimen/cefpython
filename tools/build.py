@@ -70,6 +70,7 @@ import glob
 import shutil
 import subprocess
 import re
+from distutils.sysconfig import get_python_inc as get_python_include_path
 
 # raw_input() was renamed to input() in Python 3
 try:
