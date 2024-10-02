@@ -8,7 +8,7 @@ Table of contents:
 
 ## Preface
 
-These instructions are for cefpython3-v66.1-for-python-3.11-unofficial.
+These instructions are for cefpython3-v66.1-for-python-3.12-unofficial.
 
 Before you can build CEF Python or CEF you must satisfy
 [requirements](#requirements) listed on this page.
@@ -16,9 +16,9 @@ Before you can build CEF Python or CEF you must satisfy
 
 ## Quick build instructions for Windows
 
-Complete steps for building cefpython3-v66.1-for-python-3.11-unofficial.
+Complete steps for building cefpython3-v66.1-for-python-3.12-unofficial.
 
-1) Tested and works fine on Windows 10 x86-64 and Visual Studio 2022.
+1) Tested and works fine on Windows 11 x86-64 and Visual Studio 2022.
 
 2) Open Windows Terminal and open "Developer PowerShell for VS2022" from "\/" button.
 
@@ -29,10 +29,10 @@ python -m venv venv_cefpython
 venv_cefpython/Scripts/Activate.ps1
 ```
 
-4) Clone cefpython3-v66.1-for-python-3.11-unofficial and prepare `build` directory.
+4) Clone cefpython3-v66.1-for-python-3.12-unofficial and prepare `build` directory.
 
 ```
-git clone -b cefpython3-v66.1-for-python-3.11-unofficial https://github.com/hajimen/cefpython.git
+git clone -b cefpython3-v66.1-for-python-3.12-unofficial https://github.com/hajimen/cefpython.git
 cd cefpython
 mkdir build
 cd build
@@ -48,7 +48,7 @@ pip install --upgrade -r ../tools/requirements.txt
    [Spotify CDN](https://cef-builds.spotifycdn.com/index.html).
    The version of the binaries must match exactly the CEF version from
    the "cefpython/src/version/cef_version_win.h" file
-   (the CEF_VERSION constant). For cefpython3-v66.1-for-python-3.11-unofficial,
+   (the CEF_VERSION constant). For cefpython3-v66.1-for-python-3.12-unofficial,
    [this](https://cef-builds.spotifycdn.com/cef_binary_3.3359.1774.gd49d25f_windows64.tar.bz2).
 
 7) Extract the archive in the "build/" directory. Rename the directory to
@@ -96,6 +96,6 @@ requirements common for all platforms.
 
 * Visual Studio 2022
 
-* Python 3.11 and 3.10 x86-64 distributed from [python.org](https://www.python.org/downloads/).
+* Python 3.12, 3.11 and 3.10 x86-64 distributed from [python.org](https://www.python.org/downloads/).
 
 * Windows Terminal

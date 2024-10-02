@@ -103,11 +103,11 @@ def main():
     setup(
         distclass=Distribution,
         cmdclass=cmdclass,
-        name="cefpython3-v66.1-for-python-3.11-unofficial",  # No spaces here, so that it works with deb pkg
+        name="cefpython3-v66.1-for-python-3.12-unofficial",  # No spaces here, so that it works with deb pkg
         version="{{VERSION}}",
         description="GUI toolkit for embedding a Chromium widget"
                     " in desktop applications",
-        long_description="A quick hack to run CEF Python on Python 3.11 Windows x86-64.\n"
+        long_description="A quick hack to run CEF Python on Python 3.12 Windows x86-64.\n"
                          "CEF Python is an open source project founded"
                          " by Czarek Tomczak in 2012 to provide python"
                          " bindings for the Chromium Embedded Framework."
@@ -145,6 +145,7 @@ def main():
             "Operating System :: Microsoft :: Windows",
             "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: 3.11",
+            "Programming Language :: Python :: 3.12",
             "Topic :: Desktop Environment",
             "Topic :: Internet",
             "Topic :: Internet :: WWW/HTTP",
