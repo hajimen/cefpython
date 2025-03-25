@@ -2,6 +2,8 @@
 
 This is a quick hack to run cefpython3 on Python 3.12 (and 3.10, 3.11) Windows x86-64.
 
+Now I have a better option for Python 3.12 and later. See [cef-capi-py](https://github.com/hajimen/cef-capi-py).
+
 # CEF Python
 
 Table of contents:
